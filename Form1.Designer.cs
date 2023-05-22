@@ -38,16 +38,20 @@
             path = new TextBox();
             folderName = new TextBox();
             label1 = new Label();
+            Removed = new Button();
+            RemoveFromResults = new Button();
+            FilesSelected = new Label();
+            FileCount = new Label();
             SuspendLayout();
             // 
             // Results
             // 
             Results.FormattingEnabled = true;
             Results.ItemHeight = 20;
-            Results.Location = new Point(22, 565);
+            Results.Location = new Point(21, 415);
             Results.Name = "Results";
             Results.SelectionMode = SelectionMode.MultiExtended;
-            Results.Size = new Size(754, 324);
+            Results.Size = new Size(754, 304);
             Results.Sorted = true;
             Results.TabIndex = 0;
             // 
@@ -64,7 +68,7 @@
             // RunBackup
             // 
             RunBackup.Enabled = false;
-            RunBackup.Location = new Point(22, 485);
+            RunBackup.Location = new Point(22, 320);
             RunBackup.Name = "RunBackup";
             RunBackup.Size = new Size(168, 45);
             RunBackup.TabIndex = 2;
@@ -133,11 +137,52 @@
             label1.TabIndex = 8;
             label1.Text = "Folder Name:";
             // 
+            // Removed
+            // 
+            Removed.Location = new Point(285, 238);
+            Removed.Name = "Removed";
+            Removed.Size = new Size(163, 29);
+            Removed.TabIndex = 9;
+            Removed.Text = "Remove";
+            Removed.UseVisualStyleBackColor = true;
+            Removed.Click += Removed_Click;
+            // 
+            // RemoveFromResults
+            // 
+            RemoveFromResults.Location = new Point(21, 732);
+            RemoveFromResults.Name = "RemoveFromResults";
+            RemoveFromResults.Size = new Size(173, 29);
+            RemoveFromResults.TabIndex = 10;
+            RemoveFromResults.Text = "Remove";
+            RemoveFromResults.UseVisualStyleBackColor = true;
+            RemoveFromResults.Click += RemoveFromResults_Click;
+            // 
+            // FilesSelected
+            // 
+            FilesSelected.AutoSize = true;
+            FilesSelected.Location = new Point(22, 380);
+            FilesSelected.Name = "FilesSelected";
+            FilesSelected.Size = new Size(102, 20);
+            FilesSelected.TabIndex = 11;
+            FilesSelected.Text = "Files Selected:";
+            // 
+            // FileCount
+            // 
+            FileCount.AutoSize = true;
+            FileCount.Location = new Point(135, 381);
+            FileCount.Name = "FileCount";
+            FileCount.Size = new Size(0, 20);
+            FileCount.TabIndex = 12;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(807, 925);
+            ClientSize = new Size(807, 783);
+            Controls.Add(FileCount);
+            Controls.Add(FilesSelected);
+            Controls.Add(RemoveFromResults);
+            Controls.Add(Removed);
             Controls.Add(label1);
             Controls.Add(folderName);
             Controls.Add(path);
@@ -165,5 +210,9 @@
         private TextBox path;
         private TextBox folderName;
         private Label label1;
+        private Button Removed;
+        private Button RemoveFromResults;
+        private Label FilesSelected;
+        private Label FileCount;
     }
 }

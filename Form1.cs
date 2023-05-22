@@ -3,6 +3,7 @@ using System;
 using System.Diagnostics.Metrics;
 using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
+using Serilog;
 
 namespace Backup_Helper
 {
@@ -11,13 +12,14 @@ namespace Backup_Helper
         public Form1()
         {
             InitializeComponent();
+            InitiateLog();
             folderName.Text = "\\" + "AutoBackup " + DateTime.Today.ToString("dd-MM-yyyy");
             path.Text = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-
-            //TargetDirectories.Items.Add(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
-            //TargetDirectories.Items.Add(Environment.GetFolderPath(Environment.SpecialFolder.MyMusic));
-            //TargetDirectories.Items.Add(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures));
-            //TargetDirectories.Items.Add(Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
+            FileCount.Text = "0";
+            TargetDirectories.Items.Add(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
+            TargetDirectories.Items.Add(Environment.GetFolderPath(Environment.SpecialFolder.MyMusic));
+            TargetDirectories.Items.Add(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures));
+            TargetDirectories.Items.Add(Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
 
         }
 
@@ -36,7 +38,8 @@ namespace Backup_Helper
 
         private void ScanDirectories_Click(object sender, EventArgs e)
         {
-
+            Counter.FileCount = 0;
+            Results.Items.Clear();
             try
             {
 
@@ -53,12 +56,13 @@ namespace Backup_Helper
                         else
                         {
                             Results.Items.Add(file);
+                            Counter.FileCount++;
                         }
                     }
 
                 }
                 RunBackup.Enabled = true;
-
+                FileCount.Text = Counter.FileCount.ToString();
             }
             catch
             {
@@ -125,7 +129,9 @@ namespace Backup_Helper
 
                 }
                 MessageBox.Show($"Total number of files saved is: {Counter.count}");
+                Serilog.Log.Information($"Total number of files backed up is: {Counter.count}");
                 Results.Items.Clear();
+                FileCount.Text = "0";
             }
             catch (IOException)
             {
@@ -136,7 +142,34 @@ namespace Backup_Helper
 
         }
 
+        private void Removed_Click(object sender, EventArgs e)
 
+        {
+
+            if (this.TargetDirectories.SelectedIndex >= 0)
+            {
+                this.TargetDirectories.Items.RemoveAt(this.TargetDirectories.SelectedIndex);
+                Counter.count--;
+            }
+
+        }
+
+        private void RemoveFromResults_Click(object sender, EventArgs e)
+        {
+            if (this.Results.SelectedIndex >= 0)
+            {
+                this.Results.Items.RemoveAt(this.Results.SelectedIndex);
+                Counter.FileCount--;
+                FileCount.Text = Counter.FileCount.ToString();
+            }
+        }
+
+        private void InitiateLog()
+        {
+            Serilog.Log.Logger = new LoggerConfiguration()
+                    .WriteTo.File("C:\\Users\\stuar\\OneDrive\\Desktop\\Projects\\Backup Helper\\Log.txt")
+                    .CreateLogger();
+        }
     }
 
 }

@@ -9,5 +9,6 @@ namespace Backup_Helper
     internal class Counter
     {
         public static int count;
+        public static int FileCount;
     }
 }

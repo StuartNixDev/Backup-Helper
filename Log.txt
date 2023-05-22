@@ -1,0 +1,8 @@
+2023-05-22 19:00:17.062 +01:00 [INF] Total number of files saved is: 1122-05-2023
+2023-05-22 19:01:42.165 +01:00 [INF] Total number of files saved is: 11
+2023-05-22 19:09:52.424 +01:00 [INF] Total number of files backed up is: 0
+2023-05-22 19:10:22.628 +01:00 [INF] Total number of files backed up is: 3
+2023-05-22 19:21:17.393 +01:00 [INF] Total number of files backed up is: 3
+2023-05-22 19:21:28.120 +01:00 [INF] Total number of files backed up is: 0
+2023-05-22 19:25:32.469 +01:00 [INF] Total number of files backed up is: 3
+2023-05-22 19:27:04.795 +01:00 [INF] Total number of files backed up is: 5
