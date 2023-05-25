@@ -5,6 +5,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
 using Serilog;
 using System.IO.Compression;
+using System.Reflection.Metadata.Ecma335;
 
 namespace Backup_Helper
 {
@@ -92,12 +93,14 @@ namespace Backup_Helper
         {
             Counter.count = 0;
             string fullpath = Path.Combine(path.Text.ToString() + folderName.Text.ToString());
+
             try
             {
                 foreach (string file in Results.Items)
                 {
                     string fileName = Path.GetFileName(file);
                     string target = Path.Combine(fullpath, fileName);
+                    File.SetAttributes(file, FileAttributes.Normal);
 
                     if (!Directory.Exists(fullpath))
                     {
@@ -131,28 +134,23 @@ namespace Backup_Helper
                         Counter.count++;
 
                     }
-            
+
                 }
 
                 if (ZipCheck.Checked)
                 {
-                    try
-                    {
-                        string zipDest = fullpath + ".zip";
-                        ZipFile.CreateFromDirectory(fullpath, zipDest);
-                        Directory.Delete(fullpath, true);
-                    }
-                    catch 
-                    {
-                        MessageBox.Show("Error when creating archive. File may already exist");
-                    }
+
+                    string zipDest = fullpath + ".zip";
+                    ZipFile.CreateFromDirectory(fullpath, zipDest);
+                    Directory.Delete(fullpath, true );
+       
                 }
 
                 MessageBox.Show($"Total number of files saved is: {Counter.count}");
                 Serilog.Log.Information($"Total number of files backed up is: {Counter.count}");
                 Results.Items.Clear();
                 FileCount.Text = "0";
-                RunBackup.Enabled = false;  
+                RunBackup.Enabled = false;
                 ZipCheck.Checked = false;
             }
             catch (IOException)
