@@ -4,12 +4,13 @@ using System.Diagnostics.Metrics;
 using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
 using Serilog;
+using System.IO.Compression;
 
 namespace Backup_Helper
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
             InitiateLog();
@@ -68,6 +69,10 @@ namespace Backup_Helper
             {
                 MessageBox.Show("Error! Could not access Directory");
             }
+            if (FileCount.Text == "0")
+            {
+                RunBackup.Enabled = false;
+            }
         }
 
 
@@ -86,12 +91,12 @@ namespace Backup_Helper
         private void RunBackup_Click(object sender, EventArgs e)
         {
             Counter.count = 0;
+            string fullpath = Path.Combine(path.Text.ToString() + folderName.Text.ToString());
             try
             {
                 foreach (string file in Results.Items)
                 {
                     string fileName = Path.GetFileName(file);
-                    string fullpath = Path.Combine(path.Text.ToString() + folderName.Text.ToString());
                     string target = Path.Combine(fullpath, fileName);
 
                     if (!Directory.Exists(fullpath))
@@ -126,12 +131,29 @@ namespace Backup_Helper
                         Counter.count++;
 
                     }
-
+            
                 }
+
+                if (ZipCheck.Checked)
+                {
+                    try
+                    {
+                        string zipDest = fullpath + ".zip";
+                        ZipFile.CreateFromDirectory(fullpath, zipDest);
+                        Directory.Delete(fullpath, true);
+                    }
+                    catch 
+                    {
+                        MessageBox.Show("Error when creating archive. File may already exist");
+                    }
+                }
+
                 MessageBox.Show($"Total number of files saved is: {Counter.count}");
                 Serilog.Log.Information($"Total number of files backed up is: {Counter.count}");
                 Results.Items.Clear();
                 FileCount.Text = "0";
+                RunBackup.Enabled = false;  
+                ZipCheck.Checked = false;
             }
             catch (IOException)
             {
@@ -150,6 +172,8 @@ namespace Backup_Helper
             {
                 this.TargetDirectories.Items.RemoveAt(this.TargetDirectories.SelectedIndex);
                 Counter.count--;
+
+
             }
 
         }
@@ -161,6 +185,10 @@ namespace Backup_Helper
                 this.Results.Items.RemoveAt(this.Results.SelectedIndex);
                 Counter.FileCount--;
                 FileCount.Text = Counter.FileCount.ToString();
+                if (FileCount.Text == "0")
+                {
+                    RunBackup.Enabled = false;
+                }
             }
         }
 

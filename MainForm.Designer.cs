@@ -1,6 +1,6 @@
 ﻿namespace Backup_Helper
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         ///  Required designer variable.
@@ -42,6 +42,7 @@
             RemoveFromResults = new Button();
             FilesSelected = new Label();
             FileCount = new Label();
+            ZipCheck = new CheckBox();
             SuspendLayout();
             // 
             // Results
@@ -174,11 +175,22 @@
             FileCount.Size = new Size(0, 20);
             FileCount.TabIndex = 12;
             // 
+            // ZipCheck
+            // 
+            ZipCheck.AutoSize = true;
+            ZipCheck.Location = new Point(229, 341);
+            ZipCheck.Name = "ZipCheck";
+            ZipCheck.Size = new Size(127, 24);
+            ZipCheck.TabIndex = 13;
+            ZipCheck.Text = "Create Zip File";
+            ZipCheck.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(807, 783);
+            Controls.Add(ZipCheck);
             Controls.Add(FileCount);
             Controls.Add(FilesSelected);
             Controls.Add(RemoveFromResults);
@@ -214,5 +226,6 @@
         private Button RemoveFromResults;
         private Label FilesSelected;
         private Label FileCount;
+        private CheckBox ZipCheck;
     }
 }

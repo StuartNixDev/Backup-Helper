@@ -6,3 +6,15 @@
 2023-05-22 19:21:28.120 +01:00 [INF] Total number of files backed up is: 0
 2023-05-22 19:25:32.469 +01:00 [INF] Total number of files backed up is: 3
 2023-05-22 19:27:04.795 +01:00 [INF] Total number of files backed up is: 5
+2023-05-22 21:51:51.913 +01:00 [INF] Total number of files backed up is: 31
+2023-05-22 21:52:36.166 +01:00 [INF] Total number of files backed up is: 0
+2023-05-22 21:52:47.185 +01:00 [INF] Total number of files backed up is: 0
+2023-05-25 18:02:33.490 +01:00 [INF] Total number of files backed up is: 0
+2023-05-25 18:02:58.905 +01:00 [INF] Total number of files backed up is: 11
+2023-05-25 18:05:43.887 +01:00 [INF] Total number of files backed up is: 11
+2023-05-25 18:05:58.870 +01:00 [INF] Total number of files backed up is: 11
+2023-05-25 18:08:53.464 +01:00 [INF] Total number of files backed up is: 0
+2023-05-25 18:09:54.094 +01:00 [INF] Total number of files backed up is: 0
+2023-05-25 18:10:40.767 +01:00 [INF] Total number of files backed up is: 11
+2023-05-25 18:12:04.495 +01:00 [INF] Total number of files backed up is: 11
+2023-05-25 18:14:09.336 +01:00 [INF] Total number of files backed up is: 31
